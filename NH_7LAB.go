@@ -5,21 +5,35 @@ package main
 
 import "fmt"
 
-func removeDuplicates(arr []int) []int {
-	unique := make(map[int]bool)
-	result := []int{}
-	for _, value := range arr {
-		if _, ok := unique[value]; !ok {
-			result = append(result, value)
-			unique[value] = true
-		}
-	}
-	return result
-}
-
 func main() {
-	arr := []int{1, 2, 3, 4, 1, 2, 5, 6, 3}
-	uniqueArr := removeDuplicates(arr)
-	fmt.Println(uniqueArr)
+    var arr []int
+    var n, x int
+
+    fmt.Print("Enter the number of integers: ")
+    fmt.Scan(&n)
+
+    for i := 0; i < n; i++ {
+        fmt.Printf("Enter integer %d: ", i+1)
+        fmt.Scan(&x)
+        arr = append(arr, x)
+    }
+
+    uniqueArr := []int{}
+    for _, value := range arr {
+        if !contains(uniqueArr, value) {
+            uniqueArr = append(uniqueArr, value)
+        }
+    }
+
+    fmt.Println("Original array:", arr)
+    fmt.Println("Unique array:", uniqueArr)
 }
 
+func contains(arr []int, value int) bool {
+    for _, element := range arr {
+        if element == value {
+            return true
+        }
+    }
+    return false
+}
